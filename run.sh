@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export FLASK_APP=hello
-flask run
+export FLASK_APP=App
+flask run --host=0.0.0.0 --port=5001

@@ -1,0 +1,91 @@
+{% extends "baseInnerPages.html" %}
+
+{% block content %}
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+			    <h1 class="content-subhead">Необработанные заявки</h1>
+                {% for doc in unsigned_documents %}
+                <section class="post">
+                    <header class="post-header">
+                        <img width="48" height="48" alt="IVANOV1988 avatar" class="post-avatar" src="{{url_for('static', filename = 'img/abdtPixelInverted.png')}}">
+
+                        <h2 class="post-title">{{doc.title}}</h2>
+
+                        <p class="post-meta">
+                            заявка создана пользователем <a href="#" class="post-author">{{user_names[doc.id]}}</a> {{doc.dateCreate}} 
+                            <p class="post-category" href="#">
+                                Заявка не обработана
+                            </p>
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            {{doc.description}}<br>
+							<strong>До:</strong>{{doc.duedate}}<br>
+							<strong>Ориентировочная стоимость:</strong>от {{doc.minPrice}} до {{doc.maxPrice}} рублей ориентировочно<br>
+							
+                        </p>
+                    </div>
+                {% if current_user.isConfirmer %}
+                    <div class="pure-u-1">
+						<button type="submit" style="background-color:#df2d4f" class="pure-button pure-input-1-2 pure-button-primary" onclick="location.href='/documents/confirm/{{doc.id}}'">Подтвердить</button>
+						<button type="submit" style="background-color:#5aba59" class="pure-button pure-input-1-2 pure-button-primary" onclick="location.href='/documents/reject/{{doc.id}}'">Отклонить</button>
+					</div>
+                {% endif %}
+                {% if current_user.isAsker %}
+                    <div class="pure-u-1">
+						<button type="submit" style="background-color:#df2d4f" class="pure-button pure-input-1-2 pure-button-primary" onclick="location.href='/documents/delete/{{doc.id}}'">Удалить мою заявку</button>
+					</div>
+                {% endif %}
+                </section>
+                {% endfor %}
+                <!-- A single blog post -->
+
+			
+                <h1 class="content-subhead">Обработанные заявки</h1>
+                {% for doc in signed_documents %}
+                <section class="post">
+                    <header class="post-header">
+                        <img width="48" height="48" alt="IVANOV1988 avatar" class="post-avatar" src="{{url_for('static', filename = 'img/ericf-avatar.png')}}">
+
+                        <h2 class="post-title">{{doc.title}}</h2>
+
+                        <p class="post-meta">
+                            заявка создана пользователем <a href="#" class="post-author">{{user_names[doc.id]}}</a> {{doc.dateCreate}} 
+                        {% if doc.status==1 %}
+                            <p class="post-category post-category-design" href="#">Заявка принята</p>
+                        {% elif doc.status==2 %}
+                            <p class="post-category post-category-js" href="#">Заявка отклонена</p>
+                        {% else %}
+                            <p class="post-category post-category-js" href="#">Ошибка: статус заявки неизвестен</p>
+                        {% endif %}
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>
+                            {{doc.description}}<br>
+							<strong>До:</strong>{{doc.duedate}}<br>
+							<strong>Ориентировочная стоимость:</strong>от {{doc.minPrice}} до {{doc.maxPrice}} рублей ориентировочно<br>
+							
+                        </p>
+                    </div>
+                </section>
+                {% endfor %}
+            
+            
+
+
+            </div>
+			
+
+
+
+            </div>
+
+
+{% endblock %}

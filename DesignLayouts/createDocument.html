@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts.">
+    <title>Blog &ndash; Layout Examples &ndash; Pure</title>
+    <link rel="stylesheet" href="css/pure-min.css">
+    <link rel="stylesheet" href="css/grids-responsive-min.css">
+    <link rel="stylesheet" href="css/stylesBlog.css">
+</head>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">Система обеспечения закупок оргтехники</h1>
+            <h2 class="brand-tagline">21:16 13/06/2020</h2>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button" href="http://purecss.io">Создать заявку</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="pure-button" href="http://yuilibrary.com">Мои заявки</a>
+                    </li>
+					<li class="nav-item">
+                        <a class="pure-button" href="http://yuilibrary.com">Справка о системе</a>
+                    </li>
+					<li class="nav-item">
+                        <a class="pure-button" href="http://yuilibrary.com">Выйти</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div class="posts">
+			    <h1 class="content-subhead">Создать новую заявку</h1>
+
+                <!-- A single blog post -->
+                <section class="post">
+				<form class="pure-form pure-g">
+
+					<div class="pure-u-1">
+						<input type="text" class="pure-input-1" placeholder="Тема заявки" />
+					</div>
+					<hr>
+					<div class="pure-u-1">
+						<input type="textarea" class="pure-input-1" style="min-height:100px;" placeholder="Подробно опишите текст заявки" />
+					</div>
+					<hr>
+					<div class="pure-u-1">
+						Обозначьте ориентировочную стоимость закупки
+					</div>
+					<div class="pure-u-1-2">
+						<input type="text" class="pure-input-1" placeholder="От" />
+					</div>
+					<div class="pure-u-1-2">
+						<input type="text" class="pure-input-1" placeholder="До" />
+					</div>
+					<hr>
+					<div class="pure-u-1">
+						<button type="submit" style="background-color:#df2d4f" class="pure-button pure-input-1-2 pure-button-primary">Подтвердить</button>
+						<button type="submit" style="background-color:#5aba59" class="pure-button pure-input-1-2 pure-button-primary">Отклонить</button>
+					</div>
+					
+				</form>
+                </section>
+			
+
+            </div>
+			
+
+
+
+            </div>
+
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal">
+                    <ul>
+                        <li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About</a></li>
+                        <li class="pure-menu-item"><a href="http://twitter.com/yuilibrary/" class="pure-menu-link">Twitter</a></li>
+                        <li class="pure-menu-item"><a href="http://github.com/pure-css/pure/" class="pure-menu-link">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

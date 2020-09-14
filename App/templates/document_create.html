@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Создать заявку</h3>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+            </div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST" action="/documentCreate">
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="text" name="title" placeholder="Заголовок" autofocus="">
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <textarea class="input is-large" type="text" name="description" placeholder="Опишите заявку...Какие вам нужные комплектующие и зачем" autofocus="" rows="20"></textarea>
+                </div>
+            </div>
+            <div class="field">
+                <p>До какой даты вам необходима эта техника</p>
+                <div class="control">
+                    <input class="input is-large" type="date" name="duedate" value="2020-01-08" autofocus="">
+                </div>
+            </div>
+            <div class="field">
+                <label for="vol">На какую ориентировочно сумму рассчитаны ваши покупки?(не более 1 млн. руб.):</label>
+                <div class="control">
+                    <input  type="number" name="minPrice" placeholder="от" max="1000000"><label>минимум</label>
+                </div>
+                <div class="control">
+                    <input  type="number" name="maxPrice" placeholder="до" min="0"><label>Максимум</label>
+                </div>
+            </div>
+            <button class="button is-block is-info is-large is-fullwidth">Создать заявку</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

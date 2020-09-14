@@ -16,3 +16,7 @@ def profile():
 @main.route('/bad')
 def bad_request():
     return "Internal Server Error",500
+
+@main.route('/help')
+def help_page():
+    return render_template('help_page.html', name=current_user.name)

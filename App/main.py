@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template,redirect
+from .models import Document
 from . import db
 from flask_login import login_required,current_user
 main = Blueprint('main', __name__)
@@ -20,3 +21,13 @@ def bad_request():
 @main.route('/help')
 def help_page():
     return render_template('help_page.html', name=current_user.name)
+
+@main.route('/reset')
+def reset_page():
+    return render_template('reset_page.html')
+
+@main.route('/reset_full')
+def reset_full():
+	db.session.query(Document).delete()
+	db.session.commit()
+	return redirect("/")

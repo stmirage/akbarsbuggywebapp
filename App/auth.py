@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required,current_user
 from .models import User
 from . import db
+from .main import active_required
 
 auth = Blueprint('auth', __name__)
 
@@ -11,6 +12,7 @@ def login():
     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
+@active_required
 def login_post():
     login = request.form.get('login')
     password = request.form.get('password')
@@ -26,8 +28,12 @@ def login_post():
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
-
-    return redirect(url_for('docPages.documents'))
+    _superAdmin = current_user.isSuperAdmin
+    
+    if _superAdmin:
+        return redirect(url_for('main.reset_page'))
+    else:
+        return redirect(url_for('docPages.documents'))
 
 
 @auth.route('/signup')
@@ -42,6 +48,7 @@ def signup_post():
     isAsker = 1 if request.form.get('isAsker') else 0
     isConfirmer =  1 if request.form.get('isConfirmer') else 0
     password = request.form.get('password')
+    isSuperAdmin = 0
 
 
     user = User.query.filter_by(login=login).first() # if this returns a user, then the email already exists in database
@@ -52,7 +59,7 @@ def signup_post():
 
     # create new user with the form data. Hash the password so plaintext version isn't saved.
     new_user = User(login=login, name=name, password=generate_password_hash(password, method='sha256'),lastname=lastname, \
-                   isAsker=isAsker,isConfirmer=isConfirmer)
+                   isAsker=isAsker,isConfirmer=isConfirmer, isSuperAdmin=isSuperAdmin)
 
     # add the new user to the database
     db.session.add(new_user)

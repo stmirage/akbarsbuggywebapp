@@ -2,10 +2,14 @@
 
 {% block content %}
 <div class="column is-4 is-offset-4">
-    <h3 class="title">Сбросить БДк первоначальному состоянию</h3>
+    <h3 class="title">Сбросить БД к первоначальному состоянию</h3>
     <div class="box">
+        <p>Состояние приложения {{ data.active_app }}</p>
         <button onclick="window.location.href='/reset_full'" class="button is-block is-info is-large is-fullwidth">Очистить базу</button>
-
+        <br/>
+        <button onclick="window.location.href='/activateapp'" class="button is-block is-info is-large is-fullwidth">Активировать систему</button>
+        <br/>
+        <button onclick="window.location.href='/deactivateapp'" class="button is-block is-info is-large is-fullwidth">Деактивировать систему</button>
     </div>
 
 </div>

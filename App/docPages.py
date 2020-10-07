@@ -4,13 +4,14 @@ from flask_login import login_required,current_user
 from .models import Document, User
 from . import db
 from datetime import datetime
-
+from .main import active_required
 
 docPages = Blueprint('docPages', __name__)
 
 
 @docPages.route('/documents')
 #@login_required
+@active_required
 def documents():
     all_documents = Document.query.all()
     unsigned_documents = Document.query.filter(Document.status==0).all()
@@ -26,6 +27,7 @@ def documents():
 
 @docPages.route('/documentCreate')
 @login_required
+@active_required
 def documentCreate():
     return render_template('document_create.html')
 
@@ -51,6 +53,7 @@ def signup_post():
     return redirect(url_for('docPages.documents'))
 
 @docPages.route('/documents/delete/<document_id>')
+@active_required
 def delete_post(document_id):
     document_id = int(document_id)
     Document.query.filter(Document.id == document_id).delete()
@@ -58,6 +61,7 @@ def delete_post(document_id):
     return redirect("/documents")
 
 @docPages.route('/documents/confirm/<document_id>')
+@active_required
 def confirm_post(document_id):
     document_id = int(document_id)
     doc = Document.query.filter(Document.id == document_id).first()
@@ -66,6 +70,7 @@ def confirm_post(document_id):
     return redirect("/documents")
 
 @docPages.route('/documents/reject/<document_id>')
+@active_required
 def reject_post(document_id):
     document_id = int(document_id)
     doc = Document.query.filter(Document.id == document_id).first()

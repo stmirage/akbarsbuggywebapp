@@ -12,7 +12,6 @@ def login():
     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
-@active_required
 def login_post():
     login = request.form.get('login')
     password = request.form.get('password')
